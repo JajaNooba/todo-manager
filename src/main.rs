@@ -1,5 +1,5 @@
 use clap::Parser;
-use todo_manager::{ Cli, Commands };
+use todo_manager::cli::{ Cli, Commands };
 
 fn main() {
 
