@@ -1,34 +1,7 @@
 use std::fs;
 use std::process;
 
-#[derive(Clone)]
-pub struct Task {
-    name: String,
-    description: String,
-    is_complete: bool,
-    is_important: bool
-}
-
-impl Task {
-    pub fn to_string(&self) -> String {
-        let mut str = String::new();
-        str.push_str(&self.name);
-        str.push('\n');
-        str.push_str(&self.description);
-        str.push_str("\ntask_description_end\n");
-        if self.is_complete { 
-            str.push_str("true") 
-        } else { 
-            str.push_str("false") 
-        };
-        if self.is_important { 
-            str.push_str("true") 
-        } else { 
-            str.push_str("false")
-        };
-        str
-    }
-}
+use crate::utils::Task;
 
 pub fn write_file(tasks: Vec<Task>) {
     let mut content: String = String::new();
@@ -61,17 +34,15 @@ pub fn parse_file() -> Vec<Task> {
         is_important: false 
     };
     let mut i = 0;
-    while i < lines.len() {
+    while i < lines.len() - 1 {
         let mut line = lines[i];
         // Parsing name
         task.name = line.to_string();
         
         // Parsing task description
-        while line != "task_description_end" {
-            i += 1;
-            line = lines[i];
-            task.description.push_str(line);
-        }
+        i += 1;
+        line = lines[i];
+        task.description = line.to_string();
 
         // Parse is complete
         i += 1;
