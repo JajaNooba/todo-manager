@@ -7,6 +7,7 @@ pub struct Cli {
     pub command: Commands
 }
 
+/// Simple ToDo app in CLI
 #[derive(Subcommand)]
 pub enum Commands {
     /// Adds task to ToDo list
