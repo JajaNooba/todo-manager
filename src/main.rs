@@ -6,7 +6,9 @@ pub mod commands;
 pub mod utils;
 
 use cli::{ Cli, Commands };
-use commands::run_add_command;
+use commands::{run_add_command, run_important_command};
+
+use crate::commands::{run_remove_command, run_complete_command};
 
 fn main() {
 
@@ -14,11 +16,9 @@ fn main() {
 
     match &cli.command {
         Commands::Add(args) => run_add_command(args),
-        Commands::Remove(args) => println!("Remove {}", args.task_name),
-        Commands::Complete(args) => println!("Complete {}", args.task_name),
-        Commands::Important(args) => println!("Important {}", args.task_name),
+        Commands::Remove(args) => run_remove_command(args),
+        Commands::Complete(args) => run_complete_command(args),
+        Commands::Important(args) => run_important_command(args),
         Commands::Show(args) => println!("Show {}", args.task_name)
     }
-
-    println!("Hello, world!");
 }
